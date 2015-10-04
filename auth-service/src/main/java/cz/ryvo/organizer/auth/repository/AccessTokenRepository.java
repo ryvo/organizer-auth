@@ -14,4 +14,6 @@ public interface AccessTokenRepository extends CrudRepository<AccessTokenVO, Str
     List<AccessTokenVO> findAllByClientIdAndUsername(String clientId, String username);
 
     List<AccessTokenVO> findAllByClientId(String clientId);
+
+
 }
