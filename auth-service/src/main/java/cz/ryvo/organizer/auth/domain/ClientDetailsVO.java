@@ -7,8 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @ToString(exclude = "clientSecret")
-@Document(collection = "client_details")
+@Document(collection = ClientDetailsVO.COLLECTION)
 public class ClientDetailsVO {
+
+    public static final String COLLECTION = "client";
 
     @Id
     private String clientId;

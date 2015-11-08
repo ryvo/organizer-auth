@@ -31,9 +31,9 @@ public class MongoDbUserDetailsService implements UserDetailsService {
                 userDetailsVO.getUsername(),
                 userDetailsVO.getPassword(),
                 userDetailsVO.isEnabled(),
-                userDetailsVO.isExpired(),
-                userDetailsVO.isCredentialsExpired(),
-                userDetailsVO.isLocked(),
+                !userDetailsVO.isExpired(),
+                !userDetailsVO.isCredentialsExpired(),
+                !userDetailsVO.isLocked(),
                 emptyList()
         );
     }

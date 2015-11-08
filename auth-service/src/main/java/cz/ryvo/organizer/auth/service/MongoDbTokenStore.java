@@ -61,7 +61,10 @@ public class MongoDbTokenStore implements TokenStore {
     public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
         removeAccessToken(token);
 
-        AccessTokenVO accessToken = new AccessTokenVO(authenticationKeyGenerator.extractKey(authentication), authentication, tokenKeyGenerator.extractAccessTokenKey(token), (DefaultOAuth2AccessToken) token);
+        AccessTokenVO accessToken = new AccessTokenVO(authenticationKeyGenerator.extractKey(authentication),
+                authentication, tokenKeyGenerator.extractAccessTokenKey(token), (DefaultOAuth2AccessToken) token,
+                authentication.isClientOnly() ? null : authentication.getName(), authentication.getOAuth2Request().getClientId(),
+                tokenKeyGenerator.extractRefreshTokenKey(token.getRefreshToken()));
 
         accessTokenRepository.save(accessToken);
     }
@@ -119,7 +122,7 @@ public class MongoDbTokenStore implements TokenStore {
 
     @Override
     public void removeAccessTokenUsingRefreshToken(OAuth2RefreshToken token) {
-        refreshTokenRepository.deleteByRefreshTokenId(tokenKeyGenerator.extractRefreshTokenKey(token));
+        refreshTokenRepository.deleteByTokenId(tokenKeyGenerator.extractRefreshTokenKey(token));
     }
 
     @Override

@@ -8,8 +8,10 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@Document(collection = "users")
+@Document(collection = UserDetailsVO.COLLECTION)
 public class UserDetailsVO {
+
+    public static final String COLLECTION = "user";
 
     @Id
     private BigInteger id;
@@ -58,7 +60,7 @@ public class UserDetailsVO {
     }
 
     public Boolean isEnabled() {
-        return enabled;
+        return enabled == null ? true : enabled;
     }
 
     public void setEnabled(Boolean enabled) {
@@ -66,7 +68,7 @@ public class UserDetailsVO {
     }
 
     public Boolean isLocked() {
-        return locked;
+        return locked == null ? false : locked;
     }
 
     public void setLocked(Boolean locked) {

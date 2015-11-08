@@ -4,8 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
-@Document(collection = "authentication_code")
+@Document(collection = AuthorizationCodeVO.COLLECTION)
 public class AuthorizationCodeVO {
+
+    public static final String COLLECTION = "authorization_code";
 
     @Id
     private String code;

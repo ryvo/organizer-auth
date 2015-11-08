@@ -17,30 +17,78 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<swagger2markup.version>0.8.0</swagger2markup.version>
 	</properties>
 
+	<!--
+	<profiles>
+		<profile>
+			<id>apidoc</id>
+<build>
+	<plugins>
+		<plugin>
+			<groupId>com.redowlanalytics</groupId>
+			<artifactId>swagger2markup-maven-plugin</artifactId>
+			<version>${swagger2markup.version}</version>
+			<executions>
+				<execution>
+					<id>ouptut-swagger</id>
+					<phase>prepare-package</phase>
+					<goals>
+						<goal>process-swagger</goal>
+					</goals>
+					<configuration>
+						<inputDirectory>${basedir}/src/main/resources/static/swagger/v2/</inputDirectory>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
+		</profile>
+	</profiles>
+-->
+
 	<dependencies>
-		<dependency>
-			<groupId>cz.ryvo.organizer</groupId>
-			<artifactId>auth-service</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<!--
-			<scope>provided</scope>
-			-->
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>cz.ryvo.organizer</groupId>
+			<artifactId>organizer-lib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cz.ryvo.organizer</groupId>
+			<artifactId>auth-service</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
+
+<!--
+		<dependency>
+			<groupId>io.github.robwin</groupId>
+			<artifactId>swagger2markup</artifactId>
+			<version>${swagger2markup.version}</version>
+		</dependency>
+-->
 
 		<!-- logging -->
 		<dependency>

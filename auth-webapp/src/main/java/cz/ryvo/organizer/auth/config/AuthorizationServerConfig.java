@@ -17,6 +17,7 @@ import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableAuthorizationServer
+//@AutoConfigureAfter(WebSecurityConfig.class)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -51,7 +52,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .passwordEncoder(passwordEncoder)
-                .checkTokenAccess("hasAuthority('ROLE_CHECK_TOKEN')");
+                .passwordEncoder(passwordEncoder);
+//                .checkTokenAccess("hasAuthority('ROLE_CHECK_TOKEN')");
     }
 }

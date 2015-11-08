@@ -1,9 +1,9 @@
 package cz.ryvo.organizer.auth.repository;
 
 import cz.ryvo.organizer.auth.domain.RefreshTokenVO;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface RefreshTokenRepository extends CrudRepository<RefreshTokenVO, String> {
+public interface RefreshTokenRepository extends MongoRepository<RefreshTokenVO, String> {
 
-    void deleteByRefreshTokenId(String tokenId);
+    long deleteByTokenId(String tokenId);
 }

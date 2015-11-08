@@ -30,7 +30,7 @@ public class MongoDbClientDetailsService implements ClientDetailsService {
     @Cacheable(CLIENT_DETAILS)
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         ClientDetailsVO clientDetails = clientDetailsRepository.findOne(clientId);
-        return null;
+        return convert(clientDetails);
     }
 
     private ClientDetails convert(ClientDetailsVO clientDetailsVO) {
@@ -53,6 +53,11 @@ public class MongoDbClientDetailsService implements ClientDetailsService {
             return emptySet();
         }
 
-        return stream(StringUtils.split(stringCollection, ",")).map(String::trim).sorted().collect(toSet());
+        String[] items = StringUtils.split(stringCollection, ",");
+        if (items == null) {
+            items = new String[] {stringCollection};
+        }
+
+        return stream(items).map(String::trim).sorted().collect(toSet());
     }
 }

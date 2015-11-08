@@ -24,6 +24,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+
+        <organizer-lib.version>0.0.1-SNAPSHOT</organizer-lib.version>
+        <springfox-swagger.version>2.2.2</springfox-swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -38,9 +41,27 @@
 
             <dependency>
                 <groupId>cz.ryvo.organizer</groupId>
+                <artifactId>organizer-lib</artifactId>
+                <version>${organizer-lib.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cz.ryvo.organizer</groupId>
                 <artifactId>auth-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

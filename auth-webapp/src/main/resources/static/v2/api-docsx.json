@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Organizer auth service",
+    "version": "0.1"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "token-endpoint",
+      "description": "Token Endpoint"
+    },
+    {
+      "name": "check-token-endpoint",
+      "description": "Check Token Endpoint"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "tags": [
+          "token-endpoint"
+        ],
+        "summary": "Get access token",
+        "operationId": "getAccessToken",
+        "description": "Create or get OAuth2 access token by grant type. If **password** grant type is used, username and password are required.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "grant_type",
+            "in": "query",
+            "description": "Grant type",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "password",
+              "client_credentials"
+            ]
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "Password",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OAuth2AccessToken"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/oauth/check_token": {
+      "post": {
+        "tags": [
+          "check-token-endpoint"
+        ],
+        "summary": "Check token validity",
+        "operationId": "checkToken",
+        "description": "Validates an access token.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "value",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OAuth2CheckedAccessToken"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OAuth2RefreshToken": {
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "OAuth2AccessToken": {
+      "properties": {
+        "additionalInformation": {
+          "type": "string"
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expired": {
+          "type": "boolean"
+        },
+        "expiresIn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "refreshToken": {
+          "$ref": "#/definitions/OAuth2RefreshToken"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tokenType": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "OAuth2CheckedAccessToken": {
+      "properties": {
+        "aud": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exp": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
