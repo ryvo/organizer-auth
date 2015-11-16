@@ -50,7 +50,7 @@ public class MongoDbTokenStore implements TokenStore {
         AccessTokenVO accessToken = accessTokenRepository.findByTokenId(tokenId);
 
         if (accessToken == null) {
-            log.info("Failed to find access token " + token);
+            log.info("Access token '" + token + "' not found.");
             return null;
         }
 
@@ -71,7 +71,15 @@ public class MongoDbTokenStore implements TokenStore {
 
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
-        return null;
+        String tokenId = tokenKeyGenerator.extractKey(tokenValue);
+        AccessTokenVO accessTokenVO = accessTokenRepository.findByTokenId(tokenId);
+
+        if (accessTokenVO == null) {
+            log.debug("Access token '" + tokenValue + "' not found.");
+            return null;
+        }
+
+        return accessTokenVO.getToken();
     }
 
     @Override
@@ -94,7 +102,7 @@ public class MongoDbTokenStore implements TokenStore {
         RefreshTokenVO refreshToken = refreshTokenRepository.findOne(tokenId);
 
         if (refreshToken == null) {
-            log.info("Failed to find refresh token " + refreshToken);
+            log.info("Refresh token '" + refreshToken + "' not found.");
             return null;
         }
 
@@ -108,7 +116,7 @@ public class MongoDbTokenStore implements TokenStore {
         RefreshTokenVO refreshToken = refreshTokenRepository.findOne(tokenId);
 
         if (refreshToken == null) {
-            log.info("Failed to find refresh token " + refreshToken);
+            log.info("Refresh token '" + refreshToken + "' not found.");
             return null;
         }
 
@@ -131,7 +139,8 @@ public class MongoDbTokenStore implements TokenStore {
         AccessTokenVO accessToken = accessTokenRepository.findOne(authenticationId);
 
         if (accessToken == null) {
-            log.info("Failed to find access token for client id " + authentication.getOAuth2Request().getClientId());
+            log.info("Access token for client id '" + authentication.getOAuth2Request().getClientId() + "' not found");
+            return null;
         }
 
         return accessToken.getToken();

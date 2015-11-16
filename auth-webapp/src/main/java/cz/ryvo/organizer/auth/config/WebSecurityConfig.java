@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -58,10 +59,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         if (activeProfiles.contains(Profile.API_DOC)) {
             web.ignoring()
                     .antMatchers("/swagger/**")
-                    .antMatchers("/v2/api-docsx.json");
+                    .antMatchers("/v2/api-docs.json");
         }
 
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**");
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf().disable()
+                .formLogin().disable();
     }
 }

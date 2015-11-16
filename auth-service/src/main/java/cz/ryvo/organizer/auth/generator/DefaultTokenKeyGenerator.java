@@ -17,6 +17,10 @@ public class DefaultTokenKeyGenerator implements TokenKeyGenerator {
 
     @Override
     public String extractRefreshTokenKey(OAuth2RefreshToken token) {
+        if (token == null) {
+            return null;
+        }
+
         return extractKey(token.getValue());
     }
 

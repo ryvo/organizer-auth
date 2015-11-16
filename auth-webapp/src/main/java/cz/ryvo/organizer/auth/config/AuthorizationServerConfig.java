@@ -4,6 +4,7 @@ import cz.ryvo.organizer.auth.service.MongoDbAuthorizationCodeServices;
 import cz.ryvo.organizer.auth.service.MongoDbClientDetailsService;
 import cz.ryvo.organizer.auth.service.MongoDbTokenStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +18,7 @@ import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableAuthorizationServer
-//@AutoConfigureAfter(WebSecurityConfig.class)
+@AutoConfigureAfter(WebSecurityConfig.class)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -52,7 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
-                .passwordEncoder(passwordEncoder);
-//                .checkTokenAccess("hasAuthority('ROLE_CHECK_TOKEN')");
+                .passwordEncoder(passwordEncoder)
+                .checkTokenAccess("hasAuthority('ROLE_CHECK_TOKEN')");
     }
 }
