@@ -25,6 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
 
+        <organizer-bom.version>0.0.1-SNAPSHOT</organizer-bom.version>
         <organizer-lib.version>0.0.1-SNAPSHOT</organizer-lib.version>
         <springfox-swagger.version>2.2.2</springfox-swagger.version>
     </properties>
@@ -34,7 +35,7 @@
             <dependency>
                 <groupId>cz.ryvo.organizer</groupId>
                 <artifactId>organizer-bom</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${organizer-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

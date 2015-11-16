@@ -20,35 +20,6 @@
 		<swagger2markup.version>0.8.0</swagger2markup.version>
 	</properties>
 
-	<!--
-	<profiles>
-		<profile>
-			<id>apidoc</id>
-<build>
-	<plugins>
-		<plugin>
-			<groupId>com.redowlanalytics</groupId>
-			<artifactId>swagger2markup-maven-plugin</artifactId>
-			<version>${swagger2markup.version}</version>
-			<executions>
-				<execution>
-					<id>ouptut-swagger</id>
-					<phase>prepare-package</phase>
-					<goals>
-						<goal>process-swagger</goal>
-					</goals>
-					<configuration>
-						<inputDirectory>${basedir}/src/main/resources/static/swagger/v2/</inputDirectory>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
-</build>
-		</profile>
-	</profiles>
--->
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -82,14 +53,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
 
-<!--
-		<dependency>
-			<groupId>io.github.robwin</groupId>
-			<artifactId>swagger2markup</artifactId>
-			<version>${swagger2markup.version}</version>
-		</dependency>
--->
-
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -110,8 +73,26 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
-	
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cz.jirutka.spring</groupId>
+            <artifactId>embedmongo-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+    </dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
