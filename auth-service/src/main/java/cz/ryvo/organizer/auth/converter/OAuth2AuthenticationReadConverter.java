@@ -1,5 +1,6 @@
 package cz.ryvo.organizer.auth.converter;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
@@ -30,9 +31,12 @@ public class OAuth2AuthenticationReadConverter implements Converter<DBObject, OA
         OAuth2Request oAuth2Request = new OAuth2Request((Map<String, String>) storedRequest.get("requestParameters"),
                 (String) storedRequest.get("clientId"), null, true, new HashSet((List) storedRequest.get("scope")), null, null, null, null);
         DBObject userAuthorization = (DBObject) source.get("userAuthentication");
-        Object principal = getPrincipalObject(userAuthorization.get("principal"));
-        Authentication userAuthentication = new UsernamePasswordAuthenticationToken(principal,
-                (String)userAuthorization.get("credentials"), getAuthorities((List) userAuthorization.get("authorities")));
+        Authentication userAuthentication = null;
+        if (userAuthorization != null) {
+            Object principal = getPrincipalObject(userAuthorization.get("principal"));
+            userAuthentication = new UsernamePasswordAuthenticationToken(principal,
+                    (String) userAuthorization.get("credentials"), getAuthorities((List) userAuthorization.get("authorities")));
+        }
         OAuth2Authentication authentication = new OAuth2Authentication(oAuth2Request, userAuthentication);
         return authentication;
     }

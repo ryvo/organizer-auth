@@ -39,20 +39,29 @@ public abstract class IntegrationTest {
     }
 
     private void prepareData() {
-        ClientDetailsVO clientDetailsVO = new ClientDetailsVO();
-        clientDetailsVO.setClientId("test-client");
-        clientDetailsVO.setClientSecret("$2a$10$GcOJjvXV8zRYx0HMAb9fYe7yLkZT0kF1CDX.50B.H6YQYLAeil4U2");
-        clientDetailsVO.setResourceIds("calendar");
-        clientDetailsVO.setAuthorizedGrantTypes("password,client_credentials");
-        clientDetailsVO.setAuthorities("ROLE_CHECK_TOKEN");
-        clientDetailsVO.setScope("organizer-web-scope");
-        clientDetailsRepository.save(clientDetailsVO);
+        ClientDetailsVO clien1 = new ClientDetailsVO();
+        clien1.setClientId("test_client_with_client_credentials");
+        clien1.setClientSecret("$2a$10$aRoiSKjLwJ9B4lMCVG.BjuEqcZVCzyPz8YjbiSqs1Ghz4k6zevEI2");
+        clien1.setResourceIds("calendar");
+        clien1.setAuthorizedGrantTypes("client_credentials");
+        clien1.setAuthorities("ROLE_CHECK_TOKEN");
+        clien1.setScope("test_client_with_client_credentials-scope");
+        clientDetailsRepository.save(clien1);
 
-        UserDetailsVO userDetailsVO = new UserDetailsVO();
-        userDetailsVO.setUsername("test-user");
-        userDetailsVO.setPassword("$2a$10$erx46laAODrCNXQVY64VHel./in3vz2Zo0.vrBPjs0gvlijERLWlC");
-        userDetailsVO.setEnabled(true);
-        userDetailsVO.setLocked(false);
-        userDetailsRepository.save(userDetailsVO);
+        ClientDetailsVO client2 = new ClientDetailsVO();
+        client2.setClientId("test_client_with_password");
+        client2.setClientSecret("$2a$10$t7LMC8kIu64tnp2FerkYj.sA35sETs2PBakQTq8.yEwAP5DC8ATs6");
+        client2.setResourceIds("calendar");
+        client2.setAuthorizedGrantTypes("password");
+        client2.setAuthorities(null);
+        client2.setScope("test_client_with_password-scope");
+        clientDetailsRepository.save(client2);
+
+        UserDetailsVO user1 = new UserDetailsVO();
+        user1.setUsername("test-user");
+        user1.setPassword("$2a$10$erx46laAODrCNXQVY64VHel./in3vz2Zo0.vrBPjs0gvlijERLWlC");
+        user1.setEnabled(true);
+        user1.setLocked(false);
+        userDetailsRepository.save(user1);
     }
 }

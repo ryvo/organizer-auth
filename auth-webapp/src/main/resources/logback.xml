@@ -11,14 +11,14 @@
         </encoder>
     </appender>
 
-    <logger name="cz.ryvo" level="DEBUG"/>
+    <logger name="cz.ryvo" level="TRACE"/>
 
     <logger name="org.springframework" level="TRACE"/>
     <logger name="org.springframework.security" level="TRACE"/>
     <logger name="org.springframework.cache" level="TRACE"/>
 
     <root>
-        <level value="DEBUG"/>
+        <level value="TRACE"/>
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

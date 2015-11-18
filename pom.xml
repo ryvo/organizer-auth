@@ -27,6 +27,7 @@
 
         <organizer-bom.version>0.0.1-SNAPSHOT</organizer-bom.version>
         <organizer-lib.version>0.0.1-SNAPSHOT</organizer-lib.version>
+        <organizer-test-utils.version>0.0.1-SNAPSHOT</organizer-test-utils.version>
         <springfox-swagger.version>2.2.2</springfox-swagger.version>
     </properties>
 
@@ -63,6 +64,12 @@
                 <version>${springfox-swagger.version}</version>
             </dependency>
 
+            <!-- testing -->
+            <dependency>
+                <groupId>cz.ryvo.organizer</groupId>
+                <artifactId>organizer-test-utils</artifactId>
+                <version>${organizer-test-utils.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
